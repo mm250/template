@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+    var dojoConfig = {
+        async: true,
+        baseUrl: '/dojo',
+        i18n: {
+            isBuild: false
+        },
+        paths: {
+            es6: "node_modules/requirejs-babel/es6",
+            babel: "node_modules/requirejs-babel/babel-5.8.22.min",
+            app: "app"
+        }
+    // This code registers the correct location of the "demo"
+    // package so we can load Dojo from the CDN whilst still
+    // being able to load local modules
+    //packages: [{
+    //name: "demo",
+    //location: location.pathname.replace(/\/[^/]*$/, '') + '/demo'
+    //}]
+    };
+   </script>
+
+    <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/dojo/1.10.4/dojo/resources/dojo.css">
+    <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/dojo/1.10.4/dijit/themes/tundra/tundra.css">
+
+</head>
+<body>
+
+<div id="form">
+
+</div>
+
+
+<!-- load Dojo -->
+<script src="//ajax.googleapis.com/ajax/libs/dojo/1.10.4/dojo/dojo.js"></script>
+<script>
+    require([
+        'app/App',
+        'app/middleware/doesUserHaveEntitlements',
+        'app/middleware/displayConnectedPartiesList',
+        'app/services/GetTemplate',
+        'app/template/TemplateParser'
+
+    ], function (App, doesUserHaveEntitlements, displayConnectedPartiesList,
+                 getTemplate, TemplateParser) {
+
+        var app = new App();
+
+        app.route("/", doesUserHaveEntitlements, displayConnectedPartiesList,
+                function () {
+
+           // alert("eee");
+            //getTemplate.fetch().then(function(template) {
+              //  console.log(template);
+            //});
+        });
+
+        app.route("/AddConnctedParties", function() {
+
+        });
+
+        app.on("error", function (ex) {
+            console.log(ex)
+        })
+
+
+        getTemplate().then(function(response) {
+
+            var templateParser = new TemplateParser();
+            templateParser.parse(response)
+
+            app.startup();
+        })
+    });
+</script>
+</body>
+</html>

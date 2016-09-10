@@ -1,0 +1,72 @@
+{
+  "sections": [
+    {
+      "questions": [
+
+        {
+          "dataPoint": "firstname1",
+          "type": "ValidationTextBox",
+          "attributes": {
+            "questionCode": "STATUS",
+            "placeholder": "PLEASE",
+            "required": true
+          }
+        },
+
+        {
+          "dataPoint": "firstname2",
+          "type": "ValidationTextBox",
+          "attributes": {
+            "questionCode": "STATUS",
+            "placeholder": "PLEASE",
+            "required": true
+          }
+        },
+
+        {
+          "dataPoint": "firstname3",
+          "type": "ValidationTextBox",
+          "attributes": {
+            "questionCode": "STATUS",
+            "placeholder": "PLEASE",
+            "required": true
+          }
+        },
+
+        {
+          "dataPoint": "lastname",
+          "type": "Select",
+          "attributes": {
+            "class": "red",
+            "options": [
+              {
+                "label": "00002",
+                "value": "000002"
+              },
+              {
+                "label": "00003",
+                "value": "000003",
+                "selected": true
+              },
+              {
+                "label": "00004",
+                "value": "000004"
+              }
+            ]
+          },
+
+          "rulesx": [{
+            "name": "ConditionalityIn",
+            "options": {
+              "source" : "lastname",
+              "conditions" : ["", "000002"],
+              "attributes" : {
+                "promptMessage" : "hello"
+              }
+            }
+          }]
+        }
+      ]
+    }
+  ]
+}
